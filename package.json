@@ -2,6 +2,12 @@
   "name": "mdface",
   "version": "0.0.2",
   "description": "Face your markdown compiled HTML and live reload it!",
+  "homepage": "https://github.com/LoicMahieu/mdface",
+  "bugs": "https://github.com/LoicMahieu/mdface/issues",
+  "repository": {
+    "type" : "git",
+    "url" : "http://github.com/LoicMahieu/mdface.git"
+  },
   "bin": "./bin/mdface",
   "keyswords": [
     "markdown"
