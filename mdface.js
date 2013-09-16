@@ -17,9 +17,11 @@ module.exports = function mdface (file, options) {
   var server = http.createServer(app);
   var io = socketio.listen(server);
 
-  options = _.extend({
-    port: process.env.PORT || 3000
-  }, options);
+  options = _.extend({}, options);
+
+  if (!options.port) {
+    options.port = process.env.PORT || 3000;
+  }
 
   // Setup markdown compiler
   app.compiler = compiler(file);
