@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+var mdface = require('../mdface');
+var program = require('commander');
+
+program
+  .version('0.0.1')
+  .usage('[options] <file ...>')
+  .option('-p, --port <n>', 'Specify http server port.', parseInt)
+  .parse(process.argv);
+
+var markdownfile = process.argv[2];
+
+if (!markdownfile) {
+  return console.log('Mardown file not found.');
+}
+
+mdface(markdownfile, {
+  port: program.port
+});
