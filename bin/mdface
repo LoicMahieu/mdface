@@ -1,20 +1,28 @@
 #!/usr/bin/env node
 
+var open = require('open');
 var mdface = require('../mdface');
 var program = require('commander');
 
 program
-  .version('0.0.1')
+  .version(require('../package.json').version)
   .usage('[options] <file ...>')
   .option('-p, --port <n>', 'Specify http server port.', parseInt)
+  .option('-o, --open', 'Open the page in the browser when started.', parseInt)
   .parse(process.argv);
 
-var markdownfile = process.argv[2];
+var markdownfile = process.argv[process.argv.length - 1];
 
 if (!markdownfile) {
   return console.log('Mardown file not found.');
 }
 
-mdface(markdownfile, {
+var app = mdface(markdownfile, {
   port: program.port
 });
+
+app.on('ready', function () {
+  if (program.open) {
+    open('http://' + app.get('host') + ':' + app.get('port'))
+  }
+})

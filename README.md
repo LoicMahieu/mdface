@@ -13,6 +13,17 @@ Face your markdown compiled HTML and live reload it!
 mdface ./README.md
 ```
 
+```
+Usage: mdface [options] <file ...>
+
+Options:
+
+  -h, --help      output usage information
+  -V, --version   output the version number
+  -p, --port <n>  Specify http server port.
+  -o, --open      Open the page in the browser when started.
+```
+
 ## Copyright
 
 Copyright (c) 2013 Loïc Mahieu.
