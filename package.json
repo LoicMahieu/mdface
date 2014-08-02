@@ -1,6 +1,6 @@
 {
   "name": "mdface",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Face your markdown compiled HTML and live reload it!",
   "homepage": "https://github.com/LoicMahieu/mdface",
   "bugs": "https://github.com/LoicMahieu/mdface/issues",
