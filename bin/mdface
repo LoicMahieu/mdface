@@ -11,10 +11,10 @@ program
   .option('-o, --open', 'Open the page in the browser when started.', parseInt)
   .parse(process.argv);
 
-var markdownfile = process.argv[process.argv.length - 1];
+var markdownfile = process.argv[2];
 
 if (!markdownfile) {
-  return console.log('Mardown file not found.');
+  return program.help();
 }
 
 var app = mdface(markdownfile, {

@@ -11,34 +11,28 @@ var fs = require('fs');
 var _ = require('lodash');
 var routes = require('./routes');
 var compiler = require('./lib/compiler');
+var colors = require('colors');
 
 module.exports = function mdface (file, options) {
   var app = express();
   var server = http.createServer(app);
   var io = socketio.listen(server);
 
-  options = _.extend({}, options);
-
+  options = _.merge({
+    port: process.env.PORT || 3000,
+    host: process.env.HOST || 'localhost'
+  }, options);
+  
   // Setup markdown compiler
   app.compiler = compiler(file);
 
   // all environments
   app.set('markdownfile', file);
-  app.set('port', options.port || process.env.PORT || 3000);
-  app.set('host', options.host || process.env.HOST || 'localhost');
+  app.set('port', options.port);
+  app.set('host', options.host);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
-
-  // development only
-  if ('development' == app.get('env')) {
-    app.use(express.errorHandler());
-  }
 
   app.get('/', routes.index);
 
@@ -57,12 +51,13 @@ module.exports = function mdface (file, options) {
   });
 
   // Start listening
-  console.log('Start mdface on file: ' + file);
-
   server.listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + app.get('port'));
-
-    app.emit('ready');
+    console.log(
+      colors.green('File: ') + file
+    );
+    console.log(
+      colors.green('Listening:') + ' http://' + options.host + ':' + options.port
+    );
   });
 
   return app;
