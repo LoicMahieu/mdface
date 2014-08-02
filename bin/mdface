@@ -7,22 +7,22 @@ var program = require('commander');
 program
   .version(require('../package.json').version)
   .usage('[options] <file ...>')
+  .option('-o, --open', 'Open the page in the browser when started.')
   .option('-p, --port <n>', 'Specify http server port.', parseInt)
-  .option('-o, --open', 'Open the page in the browser when started.', parseInt)
   .parse(process.argv);
 
-var markdownfile = process.argv[2];
-
-if (!markdownfile) {
+if (process.argv.length < 3) {
   return program.help();
 }
+
+var markdownfile = process.argv[process.argv.length - 1];
 
 var app = mdface(markdownfile, {
   port: program.port
 });
 
-app.on('ready', function () {
+app.on('listening', function () {
   if (program.open) {
     open('http://' + app.get('host') + ':' + app.get('port'))
   }
-})
+});

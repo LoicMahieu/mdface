@@ -58,6 +58,7 @@ module.exports = function mdface (file, options) {
     console.log(
       colors.green('Listening:') + ' http://' + options.host + ':' + options.port
     );
+    app.emit('listening');
   });
 
   return app;
