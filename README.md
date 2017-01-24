@@ -1,5 +1,7 @@
 # mdface
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/LoicMahieu/mdface.svg)](https://greenkeeper.io/)
+
 Face your markdown compiled HTML and live reload it!
 
 ## Install
